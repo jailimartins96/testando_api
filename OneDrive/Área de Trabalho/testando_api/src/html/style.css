@@ -7,11 +7,34 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f8;
-  color: #333;
-  line-height: 1.5;
+  font-family: 'Courier New', 'Segoe UI', monospace;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #0a0a0a 100%);
+  color: #e0e0e0;
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Efeito de grade de fundo */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(147, 80, 186, 0.05) 25%, rgba(147, 80, 186, 0.05) 26%, transparent 27%, transparent 74%, rgba(147, 80, 186, 0.05) 75%, rgba(147, 80, 186, 0.05) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(147, 80, 186, 0.05) 25%, rgba(147, 80, 186, 0.05) 26%, transparent 27%, transparent 74%, rgba(147, 80, 186, 0.05) 75%, rgba(147, 80, 186, 0.05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* =========================
@@ -19,29 +42,73 @@ body {
 ========================= */
 .header {
   text-align: center;
-  margin-top: 40px;
+  padding: 60px 20px 40px;
+  background: linear-gradient(135deg, #1a0033 0%, #2d0052 50%, #1a0033 100%);
+  border-bottom: 2px solid #9350ba;
+  box-shadow: 0 0 30px rgba(147, 80, 186, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(147, 80, 186, 0.15), transparent 70%);
+  pointer-events: none;
 }
 
 .header h1 {
-  font-size: 28px;
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #9350ba 0%, #d946ef 50%, #9350ba 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(147, 80, 186, 0.5);
+  margin-bottom: 10px;
+  font-style: italic;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(147, 80, 186, 0.5), 0 0 20px rgba(217, 70, 239, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(147, 80, 186, 0.8), 0 0 40px rgba(217, 70, 239, 0.5);
+  }
 }
 
 .subtitle {
-  color: #666;
-  font-size: 14px;
-  margin-top: 5px;
+  color: #b080d9;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 /* =========================
    CONTAINER PRINCIPAL
 ========================= */
 .container {
-  max-width: 400px;
-  margin: 30px auto;
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  max-width: 600px;
+  margin: 40px auto;
+  background: linear-gradient(135deg, #0f0f1f 0%, #1a0033 50%, #0f0f1f 100%);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 
+    0 0 40px rgba(147, 80, 186, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(147, 80, 186, 0.3);
+  position: relative;
 }
 
 /* =========================
@@ -50,56 +117,171 @@ body {
 .controls {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 18px;
 }
 
 .label {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #9350ba;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 10px rgba(147, 80, 186, 0.3);
 }
 
 .input {
-  padding: 10px;
+  padding: 14px 16px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  transition: border 0.2s;
+  border: 2px solid rgba(147, 80, 186, 0.3);
+  font-size: 15px;
+  background: linear-gradient(135deg, #0a0a15 0%, #1a0a2e 100%);
+  color: #e0e0e0;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.input::placeholder {
+  color: #666;
 }
 
 .input:focus {
-  border-color: #2d89ef;
+  border-color: #9350ba;
   outline: none;
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(147, 80, 186, 0.4);
+  background: linear-gradient(135deg, #0f0f1f 0%, #1a0a33 100%);
 }
 
 /* =========================
    BOTÃO
 ========================= */
 .button {
-  padding: 10px;
-  background-color: #2d89ef;
-  color: white;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #9350ba 0%, #d946ef 50%, #9350ba 100%);
+  color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(147, 80, 186, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
 }
 
 .button:hover {
-  background-color: #1b5fbf;
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(147, 80, 186, 0.6), 0 0 50px rgba(217, 70, 239, 0.3);
+  background: linear-gradient(135deg, #a962c8 0%, #e05aff 50%, #a962c8 100%);
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: 0 0 10px rgba(147, 80, 186, 0.2);
 }
 
 /* =========================
-   STATUS (LOADING / ERRO)
+   STATUS
 ========================= */
 .status {
   text-align: center;
   font-size: 14px;
   min-height: 20px;
+  color: #b080d9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
 }
 
 /* =========================
-   LISTA DE USUÁRIOS
+   RESULTADOS
+========================= */
+.resultado {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #0a0a15 0%, #1a0a2e 100%);
+  padding: 24px;
+  border-radius: 8px;
+  border-left: 4px solid #9350ba;
+  box-shadow: 
+    0 0 20px rgba(147, 80, 186, 0.2),
+    inset 0 1px 0 rgba(147, 80, 186, 0.1);
+}
+
+.resultado.vazio {
+  text-align: center;
+  color: #b080d9;
+  padding: 30px;
+  border-left: none;
+  background: linear-gradient(135deg, #0f0f1f 0%, #1a0a33 100%);
+}
+
+.resultado h2 {
+  color: #9350ba;
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(147, 80, 186, 0.3);
+}
+
+.resultado-item {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(147, 80, 186, 0.1);
+}
+
+.resultado-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.resultado-label {
+  font-weight: 700;
+  color: #d946ef;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  letter-spacing: 1.2px;
+}
+
+.resultado-valor {
+  color: #e0e0e0;
+  font-size: 15px;
+  word-break: break-word;
+  font-family: 'Courier New', monospace;
+  line-height: 1.5;
+}
+
+/* =========================
+   LISTA
 ========================= */
 .lista {
   margin-top: 20px;
@@ -107,22 +289,32 @@ body {
 }
 
 .lista li {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
+  padding: 16px;
+  border-bottom: 1px solid rgba(147, 80, 186, 0.1);
+  background: linear-gradient(90deg, rgba(147, 80, 186, 0.05) 0%, transparent 100%);
+  transition: all 0.3s ease;
+}
+
+.lista li:hover {
+  background: linear-gradient(90deg, rgba(147, 80, 186, 0.15) 0%, transparent 100%);
+  padding-left: 24px;
 }
 
 .lista li strong {
   display: block;
   font-size: 15px;
+  color: #9350ba;
+  margin-bottom: 4px;
 }
 
 .lista li small {
-  color: #777;
+  color: #888;
+  font-size: 13px;
 }
 
 .lista .vazio {
   text-align: center;
-  color: #999;
+  color: #666;
   padding: 30px 12px;
   font-style: italic;
 }
@@ -130,6 +322,59 @@ body {
 /* =========================
    FOOTER
 ========================= */
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  font-size: 12px;
+  color: #666;
+  border-top: 1px solid rgba(147, 80, 186, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .container {
+    margin: 20px;
+    padding: 24px;
+  }
+
+  .controls {
+    gap: 14px;
+  }
+
+  .button {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
 .footer {
   text-align: center;
   margin-top: 20px;

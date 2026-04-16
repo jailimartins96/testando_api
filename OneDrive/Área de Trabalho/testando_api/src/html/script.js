@@ -31,6 +31,9 @@ async function carregarUsuarios() {
     }
 
     usuarios = await resposta.json();
+    
+    // Ordenar alfabeticamente por nome
+    usuarios.sort((a, b) => a.name.localeCompare(b.name));
 
     mostrarStatus('');
     renderizarUsuarios(usuarios);
@@ -63,8 +66,18 @@ function renderizarUsuarios(listaUsuarios) {
 
 // 3. Filtrar usuários
 function filtrarUsuarios(termo) {
-  return usuarios.filter(user =>
+  const filtrados = usuarios.filter(user =>
     user.name.toLowerCase().includes(termo.toLowerCase())
+  );
+  
+  // Ordenar alfabeticamente
+  return filtrados.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+// 5. Ordenar usuários alfabeticamente
+function ordenarAlfabeticamente(listaUsuarios) {
+  return [...listaUsuarios].sort((a, b) => 
+    a.name.localeCompare(b.name, 'pt-BR')
   );
 }
 

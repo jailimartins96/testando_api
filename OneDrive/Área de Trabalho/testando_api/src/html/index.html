@@ -1,42 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testando API</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  
+  <!-- SEO básico -->
+  <meta name="description" content="Aplicação para buscar e listar usuários utilizando API pública.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Busca de Usuários</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🚀 Testando API</h1>
-            <p>Projeto para testar e explorar APIs</p>
-        </header>
 
-        <main>
-            <section class="content">
-                <div class="input-group">
-                    <input 
-                        type="text" 
-                        id="apiUrl" 
-                        placeholder="Digite a URL da API"
-                        class="input-field"
-                    >
-                    <button id="sendBtn" class="btn-primary">Enviar Requisição</button>
-                </div>
+  <header class="header">
+    <h1>Busca de Usuários</h1>
+    <p class="subtitle">Consulte usuários de forma rápida e simples</p>
+  </header>
 
-                <div class="response-section">
-                    <h2>Resposta:</h2>
-                    <pre id="response" class="response-box">Aguardando requisição...</pre>
-                </div>
-            </section>
-        </main>
+  <main class="container">
 
-        <footer>
-            <p>&copy; 2026 Testando API. Todos os direitos reservados.</p>
-        </footer>
-    </div>
+    <section class="controls" aria-label="Controles de busca">
+      
+      <!-- Campo de busca -->
+      <label for="inputBusca" class="label">Buscar usuário</label>
+      <input 
+        type="text" 
+        id="inputBusca" 
+        class="input"
+        placeholder="Digite um nome..."
+        aria-label="Campo para buscar usuários pelo nome"
+      >
 
-    <script src="script.js"></script>
+      <!-- Botão -->
+      <button id="btnBuscar" class="button">
+        Carregar Usuários
+      </button>
+
+      <!-- Status -->
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+
+    </section>
+
+    <section class="resultados" aria-label="Lista de usuários">
+      <ul id="lista" class="lista"></ul>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <small>Projeto de estudo com API pública</small>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

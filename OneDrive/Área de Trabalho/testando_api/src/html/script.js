@@ -1,75 +1,74 @@
-// Elementos do DOM
-const apiUrlInput = document.getElementById('apiUrl');
-const sendBtn = document.getElementById('sendBtn');
-const responseBox = document.getElementById('response');
+const btnBuscar = document.getElementById('btnBuscar');
+const lista = document.getElementById('lista');
+const status = document.getElementById('status');
+const inputBusca = document.getElementById('inputBusca');
 
-// Event listeners
-sendBtn.addEventListener('click', enviarRequisicao);
-apiUrlInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        enviarRequisicao();
-    }
+let usuarios = []; // estado global simples
+
+// Evento do botão
+btnBuscar.addEventListener('click', carregarUsuarios);
+
+// Evento de digitação (busca em tempo real)
+inputBusca.addEventListener('input', () => {
+  const filtrados = filtrarUsuarios(inputBusca.value);
+  renderizarUsuarios(filtrados);
 });
 
-/**
- * Função para enviar requisição para a API
- */
-async function enviarRequisicao() {
-    const url = apiUrlInput.value.trim();
+// =========================
+// FUNÇÕES
+// =========================
 
-    // Validar URL
-    if (!url) {
-        mostrarErro('Por favor, digite uma URL válida');
-        return;
+// 1. Buscar usuários da API
+async function carregarUsuarios() {
+  try {
+    mostrarStatus('Carregando...');
+    lista.innerHTML = '';
+
+    const resposta = await fetch('https://jsonplaceholder.typicode.com/users');
+
+    if (!resposta.ok) {
+      throw new Error('Erro na requisição');
     }
 
-    if (!ehUrlValida(url)) {
-        mostrarErro('URL inválida. Use http:// ou https://');
-        return;
-    }
+    usuarios = await resposta.json();
 
-    // Desabilitar botão durante requisição
-    sendBtn.disabled = true;
-    sendBtn.textContent = 'Enviando...';
-    responseBox.textContent = '⏳ Aguardando resposta...';
+    mostrarStatus('');
+    renderizarUsuarios(usuarios);
 
-    try {
-        const resposta = await fetch(url);
-        const dados = await resposta.json();
-
-        // Formatar resposta JSON
-        const respostaFormatada = JSON.stringify(dados, null, 2);
-        responseBox.textContent = respostaFormatada;
-        responseBox.style.color = '#333';
-    } catch (erro) {
-        mostrarErro(`Erro na requisição: ${erro.message}`);
-    } finally {
-        sendBtn.disabled = false;
-        sendBtn.textContent = 'Enviar Requisição';
-    }
+  } catch (erro) {
+    mostrarStatus('Erro ao carregar usuários');
+  }
 }
 
-/**
- * Função para validar se é uma URL válida
- */
-function ehUrlValida(url) {
-    try {
-        new URL(url);
-        return true;
-    } catch (erro) {
-        return false;
-    }
+// 2. Renderizar na tela
+function renderizarUsuarios(listaUsuarios) {
+  lista.innerHTML = '';
+
+  if (listaUsuarios.length === 0) {
+    lista.innerHTML = '<li>Nenhum usuário encontrado</li>';
+    return;
+  }
+
+  listaUsuarios.forEach(user => {
+    const item = document.createElement('li');
+
+    item.innerHTML = `
+      <strong>${user.name}</strong>
+      <small>${user.email}</small>
+    `;
+
+    lista.appendChild(item);
+  });
 }
 
-/**
- * Função para mostrar mensagens de erro
- */
-function mostrarErro(mensagem) {
-    responseBox.textContent = `❌ ${mensagem}`;
-    responseBox.style.color = '#d32f2f';
-    sendBtn.disabled = false;
-    sendBtn.textContent = 'Enviar Requisição';
+// 3. Filtrar usuários
+function filtrarUsuarios(termo) {
+  return usuarios.filter(user =>
+    user.name.toLowerCase().includes(termo.toLowerCase())
+  );
 }
 
-// Mensagem inicial
-console.log('🚀 Testando API iniciado com sucesso!');
+// 4. Status (loading/erro)
+function mostrarStatus(mensagem) {
+  status.textContent = mensagem;
+}

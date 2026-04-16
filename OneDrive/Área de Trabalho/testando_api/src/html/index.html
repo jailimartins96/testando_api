@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   
   <!-- SEO básico -->
-  <meta name="description" content="Aplicação para buscar e listar usuários utilizando API pública.">
+  <meta name="description" content="Busque informações de empresas pelo CNPJ de forma rápida e gratuita.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Busca de Usuários</title>
+  <title>CNPJtor - Busca de CNPJ</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header class="header">
-    <h1>Busca de Usuários</h1>
-    <p class="subtitle">Consulte usuários de forma rápida e simples</p>
+    <h1>💼 CNPJtor</h1>
+    <p class="subtitle">Busque informações de empresas pelo CNPJ</p>
   </header>
 
   <main class="container">
@@ -23,18 +23,19 @@
     <section class="controls" aria-label="Controles de busca">
       
       <!-- Campo de busca -->
-      <label for="inputBusca" class="label">Buscar usuário</label>
+      <label for="inputCNPJ" class="label">Buscar por CNPJ</label>
       <input 
         type="text" 
-        id="inputBusca" 
+        id="inputCNPJ" 
         class="input"
-        placeholder="Digite um nome..."
-        aria-label="Campo para buscar usuários pelo nome"
+        placeholder="Digite o CNPJ (com ou sem pontuação)..."
+        aria-label="Campo para buscar empresas pelo CNPJ"
+        maxlength="18"
       >
 
       <!-- Botão -->
       <button id="btnBuscar" class="button">
-        Carregar Usuários
+        Buscar CNPJ
       </button>
 
       <!-- Status -->
@@ -42,14 +43,14 @@
 
     </section>
 
-    <section class="resultados" aria-label="Lista de usuários">
-      <ul id="lista" class="lista"></ul>
+    <section class="resultados" aria-label="Informações da empresa">
+      <div id="resultado" class="resultado"></div>
     </section>
 
   </main>
 
   <footer class="footer">
-    <small>Projeto de estudo com API pública</small>
+    <small>Dados obtidos da Brasil API - Projeto de estudo</small>
   </footer>
 
   <script src="script.js"></script>

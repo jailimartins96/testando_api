@@ -128,6 +128,51 @@ body {
 }
 
 /* =========================
+   RESULTADOS DA BUSCA
+========================= */
+.resultado {
+  margin-top: 20px;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #2d89ef;
+}
+
+.resultado.vazio {
+  text-align: center;
+  color: #999;
+  padding: 30px;
+  border-left: none;
+  background: #fff;
+}
+
+.resultado h2 {
+  color: #2d89ef;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.resultado-item {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.resultado-label {
+  font-weight: bold;
+  color: #333;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.resultado-valor {
+  color: #666;
+  font-size: 15px;
+  word-break: break-word;
+}
+
+/* =========================
    FOOTER
 ========================= */
 .footer {
